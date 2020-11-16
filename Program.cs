@@ -54,7 +54,7 @@ namespace GuessingGame
             while (attempt < 5)
             {
 
-                Console.Write($"Guess a number: ");
+                Console.Write($"{secretNumber} Guess a number: ");
                 string response = Console.ReadLine().ToLower();
 
                 if (secretNumber == int.Parse(response))
@@ -62,10 +62,16 @@ namespace GuessingGame
                     attempt = 10;
                     EdwardCelebrates();
                 }
-                else
+                else if (secretNumber > int.Parse(response))
                 {
                     int guessesLeft = 4 - attempt;
-                    Console.WriteLine($"WRONG SUCKAH!   you have {guessesLeft} attempts remaining");
+                    Console.WriteLine($"you guessed too low!   you have {guessesLeft} attempts remaining");
+                    attempt++;
+                }
+                else if (secretNumber < int.Parse(response))
+                {
+                    int guessesLeft = 4 - attempt;
+                    Console.WriteLine($"you guessed too high!   you have {guessesLeft} attempts remaining");
                     attempt++;
                 }
             }
