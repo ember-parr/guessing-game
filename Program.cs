@@ -49,22 +49,23 @@ namespace GuessingGame
         static void EdwardAsks()
         {
             int attempt = 1;
+            Random r = new Random();
+            int secretNumber = r.Next(1, 100);
             while (attempt < 5)
             {
 
-                Console.Write($"[try {attempt}] Guess a number: ");
+                Console.Write($"Guess a number: ");
                 string response = Console.ReadLine().ToLower();
-                int secretNumber = 42;
 
                 if (secretNumber == int.Parse(response))
                 {
-                    Console.WriteLine("Nicely done!");
                     attempt = 10;
                     EdwardCelebrates();
                 }
                 else
                 {
-                    Console.WriteLine("WRONG SUCKAH!");
+                    int guessesLeft = 4 - attempt;
+                    Console.WriteLine($"WRONG SUCKAH!   you have {guessesLeft} attempts remaining");
                     attempt++;
                 }
             }
