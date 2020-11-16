@@ -8,7 +8,7 @@ namespace GuessingGame
         {
             Console.WriteLine("--------------------------------------------");
             EdwardSays();
-            EdwardAsks();
+            StartGame();
         }
 
 
@@ -46,12 +46,38 @@ namespace GuessingGame
             ");
         }
 
-        static void EdwardAsks()
+        static void StartGame()
         {
+            Console.Write(@"
+                Please select a difficulty level
+                EASY [press 1]
+                MEDIUM [press 2]
+                HARD [press 3]
+                ");
+            string response = Console.ReadLine();
+            int difficulty = int.Parse(response);
+            EdwardAsks(difficulty);
+        }
+
+        static void EdwardAsks(int difficulty)
+        {
+            int maxAttempts = 0;
+            if (difficulty == 1)
+            {
+                maxAttempts = 8;
+            }
+            if (difficulty == 2)
+            {
+                maxAttempts = 6;
+            }
+            if (difficulty == 3)
+            {
+                maxAttempts = 4;
+            }
             int attempt = 1;
             Random r = new Random();
             int secretNumber = r.Next(1, 100);
-            while (attempt < 5)
+            while (attempt <= maxAttempts)
             {
 
                 Console.Write($"{secretNumber} Guess a number: ");
@@ -59,18 +85,18 @@ namespace GuessingGame
 
                 if (secretNumber == int.Parse(response))
                 {
-                    attempt = 10;
                     EdwardCelebrates();
+                    break;
                 }
                 else if (secretNumber > int.Parse(response))
                 {
-                    int guessesLeft = 4 - attempt;
+                    int guessesLeft = maxAttempts - attempt;
                     Console.WriteLine($"you guessed too low!   you have {guessesLeft} attempts remaining");
                     attempt++;
                 }
                 else if (secretNumber < int.Parse(response))
                 {
-                    int guessesLeft = 4 - attempt;
+                    int guessesLeft = maxAttempts - attempt;
                     Console.WriteLine($"you guessed too high!   you have {guessesLeft} attempts remaining");
                     attempt++;
                 }
