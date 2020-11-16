@@ -50,7 +50,22 @@ namespace GuessingGame
         {
             Console.Write("Guess a number: ");
             string response = Console.ReadLine().ToLower();
-            Console.Write($"You guessed ** {response} **");
+            int secretNumber = 42;
+
+            if (secretNumber == int.Parse(response))
+            {
+                Console.WriteLine("Nicely done!");
+            }
+            else
+            {
+                Console.WriteLine("WRONG SUCKAH!");
+            }
+
+
+
+
+
+
         }
     }
 
