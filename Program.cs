@@ -49,10 +49,15 @@ namespace GuessingGame
         static void StartGame()
         {
             Console.Write(@"
-                Please select a difficulty level
+                Please select a difficulty level:
                 EASY [press 1]
+                    8 tries to guess the correct number
                 MEDIUM [press 2]
+                    6 tries to guess the correct number
                 HARD [press 3]
+                    4 tries to guess the correct number
+                CHEATER [press 9]
+                    9999 tries to guess the correct number
                 ");
             string response = Console.ReadLine();
             int difficulty = int.Parse(response);
@@ -73,6 +78,10 @@ namespace GuessingGame
             if (difficulty == 3)
             {
                 maxAttempts = 4;
+            }
+            if (difficulty == 4)
+            {
+                maxAttempts = 9999;
             }
             int attempt = 1;
             Random r = new Random();
